@@ -1,8 +1,10 @@
 import React from "react";
 import {Button, Container, Grid, makeStyles, Paper, Typography} from "@material-ui/core";
 
+// The URL to make API requests to
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
+// MaterialUI CSS Styling
 const useStyles = makeStyles((theme) => ({
     pageContainer: {
         padding: theme.spacing(3)
@@ -25,23 +27,25 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+// Function to round a number to 2 decimal places
 const roundTo2DP = number => {
-    return Math.round(number * 100) / 100
+    return Math.round(number * 100) / 100;
 }
 
 function App() {
     const classes = useStyles();
 
-    const [selectedFile, setFile] = React.useState(null);
-    const [objURL, setObjURL] = React.useState(null);
-    const [cat, setCat] = React.useState("")
-    const [dog, setDog] = React.useState("")
+    const [selectedFile, setFile] = React.useState(null);   // File that has been uploaded
+    const [objURL, setObjURL] = React.useState(null);       // Temporary URL address where the uploaded file is cached (so we can display it)
+    const [cat, setCat] = React.useState("");               // Float representing confidence in it being a cat
+    const [dog, setDog] = React.useState("");               // Float representing confidence in it being a dog
 
+    // Handler for when a file is uploaded using the UPLOAD button
     const onChangeHandler = event => {
         try {
             if (event.target.files.length > 0) {
-                setFile(event.target.files[0]);
-                setObjURL(URL.createObjectURL(event.target.files[0]))
+                setFile(event.target.files[0]);                         // Set the file state to the provided file
+                setObjURL(URL.createObjectURL(event.target.files[0]));  // Set the URL where the file is stored
             }
         }
         catch (e) {
@@ -49,10 +53,12 @@ function App() {
         }
     }
 
+    // Handler for when the submit button is pressed
     const onClickHandler = event => {
-        const data = new FormData();
-        data.append("image", selectedFile)
+        const data = new FormData();        // Create a new request body
+        data.append("image", selectedFile)  // Add image to the body
 
+        // Start API post
         fetch(apiUrl + "/submit", {
             method: "post",
             mode: "cors",

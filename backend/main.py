@@ -23,11 +23,19 @@ def root():
 def submit():
     file = request.files["image"]
 
+    # Read in the request file to a PIL image for processing
     img: Image.Image = Image.open(file.stream)
+
+    # Rescale the image to 180x180 pixels for the AI
     img = img.resize((180, 180))
+
+    # Turn the image into a 2D array
     img_array = keras.preprocessing.image.img_to_array(img)
+
+    # Turn the 2D array into a standard array
     img_array = tf.expand_dims(img_array, 0)  # Create batch axis
 
+    # Send array to AI for processing
     predictions = model.predict(img_array)
     score = float(predictions[0][0])
 
