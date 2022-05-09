@@ -10,5 +10,5 @@ To start the application, simply run `docker compose up` in the root directory.
 
 [Video Demo](https://youtu.be/6dpbZBF1RHU)
 
-![Dog Example](https://github.com/MattFrench019/Helpdesk-Py/blob/master/img/dog_example.png)
-![Cat Example](https://github.com/MattFrench019/Helpdesk-Py/blob/master/img/cat_example.png)
+![Dog Example](https://github.com/MattFrench019/cats-vs-dogs/blob/master/img/dog_example.png)
+![Cat Example](https://github.com/MattFrench019/cats-vs-dogs/blob/master/img/cat_example.png)
